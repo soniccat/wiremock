@@ -334,18 +334,6 @@ task signAll {
     dependsOn signJars, signThinJar, signShadowJar, signThinJarPom, signStandaloneJarPom
 }
 
-task npmInstall(type: Exec) {
-    workingDir 'docs-v2'
-    commandLine 'npm', 'i'
-}
-
-task generateApiDocs(type: Exec) {
-    dependsOn npmInstall
-    workingDir 'docs-v2'
-    commandLine 'npm', 'run', 'apidocs'
-}
-jar.dependsOn generateApiDocs
-processResources.dependsOn generateApiDocs
 
 task deleteGeneratedApiDocs(type: Delete) {
     delete "src/main/resources/swagger"
